@@ -1,5 +1,6 @@
 spring:
   jpa:
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
     open-in-view: false
     hibernate:
@@ -8,6 +9,8 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
         default_catalog: postgres
         default_schema: persado
         dialect: org.hibernate.dialect.PostgreSQL94Dialect
