@@ -3,8 +3,6 @@ package com.persado.assignment.project.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -21,19 +19,15 @@ import java.util.List;
 )
 public class Address extends PersistableEntity {
 
-	@NotBlank
 	@Column(length = 100, nullable = false)
 	private String street;
 
-	@Min(1)
 	@Column(name = "house_number", nullable = false)
 	private int houseNumber;
 
-	@NotBlank
 	@Column(name = "postal_code", length = 10, nullable = false)
 	private String postalCode;
 
-	@NotBlank
 	@Column(length = 100, nullable = false)
 	private String town;
 

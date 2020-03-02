@@ -26,7 +26,7 @@ public class Book extends PersistableEntity{
 	private String summary;
 
 	@Column(name = "isbn", nullable = false, unique = true)
-	private String ISBN;
+	private String isbn;
 
 	@Column
 	private int purchased;

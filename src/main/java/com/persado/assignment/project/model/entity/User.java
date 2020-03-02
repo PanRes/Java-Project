@@ -3,7 +3,6 @@ package com.persado.assignment.project.model.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 @Getter
@@ -20,11 +19,9 @@ import java.util.List;
 )
 public class User extends PersistableEntity {
 
-	@NotBlank
 	@Column(name = "first_name", length = 100, nullable = false)
 	private String firstName;
 
-	@NotBlank
 	@Column(name = "last_name", length = 100, nullable = false)
 	private String lastName;
 
