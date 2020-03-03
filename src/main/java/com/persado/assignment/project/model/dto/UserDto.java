@@ -3,7 +3,6 @@ package com.persado.assignment.project.model.dto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,8 +21,7 @@ public class UserDto {
 	@NotBlank(message = "Last Name is a mandatory field")
 	private String lastName;
 
-	@NotNull
-	private AddressDto address;
+	private AddressDto address = new AddressDto();
 
 	private List<BookDto> books;
 

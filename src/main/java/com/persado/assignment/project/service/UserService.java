@@ -2,7 +2,9 @@ package com.persado.assignment.project.service;
 
 import com.persado.assignment.project.converter.UserConverter;
 import com.persado.assignment.project.model.dto.UserDto;
+import com.persado.assignment.project.model.entity.Address;
 import com.persado.assignment.project.model.entity.User;
+import com.persado.assignment.project.repository.AddressRepository;
 import com.persado.assignment.project.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,18 @@ import java.util.UUID;
 public class UserService {
 
 	private final UserRepository userRepository;
+	private final AddressRepository addressRepository;
 	private final UserConverter userConverter;
 
 	public UserDto saveUser(UserDto userDto) {
-		User user = userRepository.save(userConverter.toEntity(userDto));
+		User user = userConverter.toEntity(userDto);
+		Address address = addressRepository.findAddressByStreetAndHouseNumberAndPostalCodeAndTown(
+				user.getAddress().getStreet(), user.getAddress().getHouseNumber(), user.getAddress().getPostalCode(),
+				user.getAddress().getTown());
+		if (address != null) {
+			user.setAddress(address);
+		}
+		userRepository.save(user);
 
 		return userConverter.toDto(user);
 	}
