@@ -22,6 +22,10 @@ public class BookController {
 		return "book/loan";
 	}
 
+	@RequestMapping({"returnBook", "/returnBook", "returnBook.html", "/returnBook.html", "book/return", "/book/return", "book/return.html", "/book/return.html"})
+	public String returnBookPage() {
+		return "book/return";
+	}
 
 
 }
