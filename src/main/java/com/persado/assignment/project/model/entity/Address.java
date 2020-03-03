@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -35,4 +36,13 @@ public class Address extends PersistableEntity {
 	@OneToMany(mappedBy = "address")
 	private List<User> users;
 
+	@Builder
+	public Address(UUID id, String street, int houseNumber, String postalCode, String town, List<User> users) {
+		this.id = id;
+		this.street = street;
+		this.houseNumber = houseNumber;
+		this.postalCode = postalCode;
+		this.town = town;
+		this.users = users;
+	}
 }

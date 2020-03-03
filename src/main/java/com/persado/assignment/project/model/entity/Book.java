@@ -4,12 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @ToString(callSuper = true)
 @Entity
 @Table(
@@ -41,6 +40,17 @@ public class Book extends PersistableEntity{
 			inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false))
 	private List<User> users;
 
+	@Builder
+	public Book(UUID id, String name, String summary, String isbn, int purchased, int available, List<User> users) {
+		this.id = id;
+		this.name = name;
+		this.summary = summary;
+		this.isbn = isbn;
+		this.purchased = purchased;
+		this.available = available;
+		this.users = users;
+	}
+
 	public void bookReturned() {
 		if (available < purchased) {
 			available++;
@@ -50,9 +60,13 @@ public class Book extends PersistableEntity{
 		}
 	}
 
-	public void bookPurchased() {
-		purchased++;
-		available++;
+	public void bookLoaned() {
+		if (available > 0) {
+			available--;
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
 }

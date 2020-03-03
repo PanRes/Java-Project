@@ -1,15 +1,17 @@
 package com.persado.assignment.project.model.entity;
 
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@NamedEntityGraph
 @ToString(callSuper = true)
 @Entity
 @Table(
@@ -34,5 +36,14 @@ public class User extends PersistableEntity {
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false))
 	private List<Book> books;
+
+	@Builder
+	public User(UUID id, String firstName, String lastName, Address address, List<Book> books) {
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.books = books;
+	}
 
 }
