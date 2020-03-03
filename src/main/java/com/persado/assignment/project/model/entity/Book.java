@@ -53,18 +53,20 @@ public class Book extends PersistableEntity{
 		this.users = users;
 	}
 
-	public void bookReturned() {
+	public void returned(User user) {
 		if (available < purchased) {
 			available++;
+			users.removeIf(u -> u.equals(user));
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public void bookLoaned() {
+	public void loaned(User user) {
 		if (available > 0) {
 			available--;
+			users.add(user);
 		}
 		else {
 			throw new IllegalArgumentException();
