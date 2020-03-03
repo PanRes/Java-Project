@@ -1,9 +1,6 @@
 package com.persado.assignment.project.model.entity;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -11,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@NamedEntityGraph
+@NoArgsConstructor
 @ToString(callSuper = true)
 @Entity
 @Table(
@@ -27,11 +24,11 @@ public class User extends PersistableEntity {
 	@Column(name = "last_name", length = 100, nullable = false)
 	private String lastName;
 
-	@ManyToOne
+	@ManyToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "address_id", referencedColumnName = "id", nullable = false)
 	private Address address;
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_book",
 			joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false))

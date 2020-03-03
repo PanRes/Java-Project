@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
     <head>
         <meta charset="UTF-8">
         <title>Users</title>
     </head>
     <body>
-        Not Implemented yet <a href="/">Return Home</a>
+    <a href="/">Return Home</a>
+        <h2 th:text="'User Page'">User Page</h2>
+        <hr>
+        <span th:if="${users != null && users.size() > 0}">
+            <table>
+                <thead>
+                <tr>
+                    <td>First Name</td>
+                    <td>Last Name</td>
+                    <td>Address</td>
+                    <td>Delete</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user:${users}">
+                    <td th:text="${user.firstName}"/>
+                    <td th:text="${user.lastName}"/>
+                    <td th:text="${user.address}"/>
+                    <td><a  th:if="${user.books == null || user.books.size() == 0}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="'Delete User'"></a></td>
+                </tr>
+                </tbody>
+            </table>
+        </span>
+        <span th:if="${users == null || users.size() == 0}">
+            No Users Found
+        </span>
     </body>
 </html>

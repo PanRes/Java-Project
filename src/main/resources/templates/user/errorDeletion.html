@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+	<head>
+		<meta charset="UTF-8">
+		<title>Users</title>
+	</head>
+	<body>
+		<a href="/">Return Home</a>
+
+		<h2 th:text="'User:' + ${user.firstName} + ' ' + ${user.lastName} + ' cannot be deleted. The following books must be returned first'"></h2>
+		<hr>
+		<ol>
+			<li th:each="book:${user.books}" th:text="${book.name}"></li>
+		</ol>
+
+	</body>
+</html>

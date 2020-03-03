@@ -12,7 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 public class AddressDto {
 
 	private UUID id;
@@ -29,11 +28,14 @@ public class AddressDto {
 	@NotBlank(message = "Town is a mandatory field")
 	private String town;
 
-	@ToString.Exclude
 	private List<UserDto> users;
 
 	public boolean isNew() {
 		return id == null;
 	}
 
+	@Override
+	public String toString() {
+		return street + ' ' + houseNumber + ", " + postalCode + ", " + town;
+	}
 }

@@ -1,6 +1,7 @@
 package com.persado.assignment.project.service;
 
 import com.persado.assignment.project.converter.UserConverter;
+import com.persado.assignment.project.exception.UserDeletionException;
 import com.persado.assignment.project.model.dto.UserDto;
 import com.persado.assignment.project.model.entity.Address;
 import com.persado.assignment.project.model.entity.User;
@@ -44,9 +45,14 @@ public class UserService {
 	public void deleteUser(UUID userId) throws CannotProceedException {
 		User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
 		if (!CollectionUtils.isEmpty(user.getBooks())) {
-			throw new CannotProceedException("User has loaned books and cannot be deleted");
+			throw new UserDeletionException("User has loaned books and cannot be deleted");
 		}
 
 		userRepository.delete(user);
+	}
+
+	public UserDto findUserById(UUID userId) {
+		User user = userRepository.findById(userId).orElseThrow(IllegalArgumentException::new);
+		return userConverter.toDto(user);
 	}
 }
