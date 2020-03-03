@@ -21,10 +21,10 @@ public class LoanReturnController {
 			"book/loan", "book/loan.html", "/book/loan", "/book/loan.html"})
 	public String loanBookPage(Model model) {
 
-		model.addAttribute("loanReturnForm", new LoanReturnForm());
+		model.addAttribute("loanReturnForm", new LoanReturnForm(LOAN));
 		model.addAttribute("loanReturns", loanReturnService.getBooksForLoan());
 
-		return "book/loan";
+		return "book/loanReturn";
 	}
 
 	@PostMapping({"loan", "loan.html", "/loan", "/loan.html",

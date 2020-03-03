@@ -48,4 +48,27 @@ public class LoanReturnService {
 		bookRepository.save(book);
 	}
 
+	public List<LoanReturnResult> getBooksForReturn() {
+		List<BookDto> books = bookConverter.toDtosList(bookRepository.findBooksByAvailableLessThanPurchased());
+		List<UserDto> users = userConverter.toDtosList(userRepository.findAll());
+
+		List<LoanReturnResult> loanReturns = books.stream()
+				.map(LoanReturnResult::new)
+				.collect(Collectors.toList());
+
+		loanReturns.forEach(loanReturn -> loanReturn.setUsers(users.stream()
+				.filter(user -> loanReturn.getBook().getUsers().stream().anyMatch(userDto -> userDto.equals(user)))
+				.collect(Collectors.toList())));
+
+		return loanReturns;
+	}
+
+	public void returnBook(LoanReturnForm returnBook) {
+		User user = userRepository.findById(returnBook.getUserId()).orElseThrow(IllegalArgumentException::new);
+		Book book = bookRepository.findById(returnBook.getBookId()).orElseThrow(IllegalArgumentException::new);
+
+		book.returned(user);
+		bookRepository.save(book);
+	}
+
 }
