@@ -37,18 +37,6 @@ public class BookController {
 		return "book/index";
 	}
 
-	@RequestMapping(
-			{"loan", "/loan", "loan.html", "/loan.html", "book/loan", "/book/loan", "book/loan.html", "/book/loan.html"})
-	public String loanBookPage() {
-		return "book/loan";
-	}
-
-	@RequestMapping(
-			{"returnBook", "/returnBook", "returnBook.html", "/returnBook.html", "book/return", "/book/return", "book/return.html", "/book/return.html"})
-	public String returnBookPage() {
-		return "book/return";
-	}
-
 	@PostMapping("book")
 	public String createBook(@Valid BookDto book) {
 		bookService.saveBook(book);
