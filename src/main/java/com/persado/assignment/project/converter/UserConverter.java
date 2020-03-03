@@ -14,6 +14,7 @@ public class UserConverter implements Converter<User, UserDto> {
 	@Override
 	public User toEntity(UserDto user) {
 		return User.builder()
+				.id(user.getId())
 				.firstName(user.getFirstName())
 				.lastName(user.getLastName())
 				.address(addressConverter.toEntity(user.getAddress()))
@@ -23,6 +24,7 @@ public class UserConverter implements Converter<User, UserDto> {
 	@Override
 	public UserDto toDto(User user) {
 		return UserDto.builder()
+				.id(user.getId())
 				.firstName(user.getFirstName())
 				.lastName(user.getLastName())
 				.address(addressConverter.toDto(user.getAddress()))

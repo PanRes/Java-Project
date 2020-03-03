@@ -9,6 +9,7 @@ public class AddressConverter implements Converter<Address, AddressDto> {
 
 	public Address toEntity(AddressDto address) {
 		return Address.builder()
+				.id(address.getId())
 				.street(address.getStreet())
 				.houseNumber(address.getHouseNumber())
 				.postalCode(address.getPostalCode())
@@ -18,6 +19,7 @@ public class AddressConverter implements Converter<Address, AddressDto> {
 
 	public AddressDto toDto(Address address) {
 		return AddressDto.builder()
+				.id(address.getId())
 				.street(address.getStreet())
 				.houseNumber(address.getHouseNumber())
 				.postalCode(address.getPostalCode())
