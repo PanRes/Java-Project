@@ -5,28 +5,19 @@
     </head>
     <body>
         <a href="/">Return Home</a>
-        <span th:if="${error != null}" th:text="${error}">Static summary</span>
         <h2 th:text="'Books Page'">Books Page</h2>
         <hr>
-        "${book.name}",
-        <table id="owners" class="table table-striped">
-            <thead>
-            <tr>
-                <td>Id</td>
-                <td style="width: 100px">Name</td>
-                <td style="width: 300px">Summary</td>
-                <td>Delete</td>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="book:${books}">
-                <td th:text="${book.name}"></td>
-                <td th:text="${book.summary}"></td>
-                <td th:text="${book.isbn}"></td>
-                <td th:text="${book.isbn}"></td>
-                <td><a th:href="@{/book/delete(bookId=${book.id})}"></a>Delete Book</td>
-            </tr>
-            </tbody>
-        </table>
+        <span th:if="${books != null && books.size() > 0}">
+            <ol>
+                <li th:each="book:${books}" th:inline="text">
+                    <span th:text="'&quot;' + ${book.getName()} + '&quot;, ' + ${book.getAvailable()} + ' copies, ' + ${book.onLoan()} + ' on loan' + ${book.getUsersInLine()}"></span>
+                    <a th:if="${book.purchased - book.available == 0}" th:href="@{/book/{bookId}(bookId = ${book.id})}" th:text="'Delete this Book'"></a>
+                </li>
+            </ol>
+        </span>
+        <span th:if="${books == null || books.size() == 0}">
+            No Books Found
+        </span>
+
     </body>
 </html>

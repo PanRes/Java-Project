@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.UUID;
 
+import static javax.persistence.FetchType.EAGER;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -34,7 +36,7 @@ public class Book extends PersistableEntity{
 	private int available;
 
 	@ToString.Exclude
-	@ManyToMany
+	@ManyToMany(fetch = EAGER)
 	@JoinTable(name = "user_book",
 			joinColumns = @JoinColumn(name = "book_id", referencedColumnName = "id", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false))

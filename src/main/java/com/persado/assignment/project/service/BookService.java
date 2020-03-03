@@ -1,6 +1,7 @@
 package com.persado.assignment.project.service;
 
 import com.persado.assignment.project.converter.BookConverter;
+import com.persado.assignment.project.exception.BookDeletionException;
 import com.persado.assignment.project.model.dto.BookDto;
 import com.persado.assignment.project.model.entity.Book;
 import com.persado.assignment.project.repository.BookRepository;
@@ -37,7 +38,7 @@ public class BookService {
 	public void deleteBook(UUID bookId) throws CannotProceedException {
 		Book book = bookRepository.findById(bookId).orElseThrow(IllegalArgumentException::new);
 		if (!CollectionUtils.isEmpty(book.getUsers())) {
-			throw new CannotProceedException("Book is loaned and cannot be deleted");
+			throw new BookDeletionException("Book is loaned and cannot be deleted");
 		}
 
 		bookRepository.delete(book);
