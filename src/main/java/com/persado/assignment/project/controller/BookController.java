@@ -2,6 +2,7 @@ package com.persado.assignment.project.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class BookController {
@@ -12,7 +13,7 @@ public class BookController {
 		return "book/bookForm";
 	}
 
-	@RequestMapping({"user","/user","/user.html","user/index","user/index.html","/user/index","/user/index.html"})
+	@GetMapping({"books","/books","/books.html","books/index","books/index.html","/books/index","/books/index.html"})
 	public String showBooksPage() {
 		return "book/index";
 	}
