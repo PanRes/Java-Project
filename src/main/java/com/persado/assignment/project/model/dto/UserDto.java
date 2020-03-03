@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -29,4 +30,20 @@ public class UserDto {
 		return id == null;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass() || this.isNew() || ((UserDto) o).isNew()) {
+			return false;
+		}
+		UserDto userDto = (UserDto) o;
+		return Objects.equals(id, userDto.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 }

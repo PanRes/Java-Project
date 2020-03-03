@@ -5,6 +5,7 @@ import lombok.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Getter
@@ -38,4 +39,22 @@ public class AddressDto {
 	public String toString() {
 		return street + ' ' + houseNumber + ", " + postalCode + ", " + town;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass() || this.isNew() || ((AddressDto) o).isNew()) {
+			return false;
+		}
+		AddressDto addressDto = (AddressDto) o;
+		return Objects.equals(id, addressDto.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
 }

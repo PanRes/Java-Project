@@ -9,6 +9,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@EqualsAndHashCode
 public class LoanReturnForm {
 
 	private UUID bookId;
