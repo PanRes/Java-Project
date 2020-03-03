@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" >
     <head>
-        <title>Loan Book</title>
+        <title>LoanReturn Book</title>
     </head>
     <body>
         <a href="/">Return Home</a>
-        <h2 th:text="'Loan Book Page'">Loan Book Page</h2>
+        <h2 th:text="${loanReturnForm.isLoan()} ? 'Loan' : 'Return' + ' Book Page'">LoanReturn Book Page</h2>
         <hr>
         <span th:if="${loanReturns != null && loanReturns.size() > 0}">
             <ol>
                 <li th:each="loanReturn:${loanReturns}" th:inline="text">
-                    <form th:action="@{/loan}" th:object="${loanReturnForm}" method='POST'>
+                    <form th:action="@{/__${loanReturnForm.getLoanReturnPath().getPath()}__}" th:object="${loanReturnForm}" method='POST'>
                         <input type="hidden" th:value="${loanReturn.getBook().getId()}" name="bookId"/>
-                        <span th:text="'&quot;' + ${loanReturn.getBook().getName()} + '&quot;, ' + ${loanReturn.getBook().getAvailable()} + ' available'" ></span>
+                        <span th:text="'&quot;' + ${loanReturn.getBook().getName()} + '&quot;'" ></span>
+                        <span th:if="${loanReturnForm.isLoan()}" th:text="', ' + ${loanReturn.getBook().getAvailable()} + ' available'" ></span>
                         <select th:field="*{userId}">
                             <option value="" selected="true" disabled="disabled"> -- </option>
                             <option th:each="user : ${loanReturn.getUsers()}" th:value="${user.getId()}" th:text="${user.getFirstName() + ' ' + user.getLastName()}">
                             </option>
                         </select>
-                        <input type="submit" value="Accept Loan" />
+                        <input type="submit" th:value="${loanReturnForm.isLoan()} ? 'Accept Loan' : 'Register Return'" />
                     </form>
                 </li>
             </ol>

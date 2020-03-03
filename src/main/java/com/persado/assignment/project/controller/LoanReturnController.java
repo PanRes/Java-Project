@@ -8,6 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import static com.persado.assignment.project.enums.LoanReturnPath.LOAN;
+import static com.persado.assignment.project.enums.LoanReturnPath.RETURN_BOOK;
+
 @RequiredArgsConstructor
 @Controller
 public class LoanReturnController {
@@ -35,8 +38,20 @@ public class LoanReturnController {
 
 	@GetMapping({"returnBook", "/returnBook", "returnBook.html", "/returnBook.html", "book/return", "/book/return",
 			"book/return.html", "/book/return.html"})
-	public String returnBookPage() {
-		return "book/return";
+	public String returnBookPage(Model model) {
+
+		model.addAttribute("loanReturnForm", new LoanReturnForm(RETURN_BOOK));
+		model.addAttribute("loanReturns", loanReturnService.getBooksForReturn());
+
+		return "book/loanReturn";
+	}
+
+	@PostMapping({"returnBook", "/returnBook", "returnBook.html", "/returnBook.html", "book/return", "/book/return",
+			"book/return.html", "/book/return.html"})
+	public String returnBook(LoanReturnForm form) {
+		loanReturnService.returnBook(form);
+
+		return "redirect:/returnBook";
 	}
 
 }
