@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class UserController {
 
-	@RequestMapping("/userForm")
+	@RequestMapping({"userForm","/userForm","/userForm.html","user/userForm","user/userForm.html","/user/userForm",
+			"/user/userForm.html", "user/createForm", "/user/createForm", "user/createForm.hmtl", "/user/createForm.html"})
 	public String createUserPage() {
-		return "userForm";
+		return "user/userForm";
 	}
 
-	@RequestMapping("/users")
+	@RequestMapping({"user","/user","/user.html","user/index","user/index.html","/user/index","/user/index.html"})
 	public String showUsersPage() {
-		return "showUsers";
+		return "user/index";
 	}
 
 }

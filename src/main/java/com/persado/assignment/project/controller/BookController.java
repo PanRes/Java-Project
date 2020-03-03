@@ -6,19 +6,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class BookController {
 
-	@RequestMapping("/bookForm")
+	@RequestMapping({"bookForm","/bookForm","/bookForm.html","book/bookForm","book/bookForm.html","/book/bookForm",
+			"/book/bookForm.html", "book/createForm", "/book/createForm", "book/createForm.hmtl", "/book/createForm.html"})
 	public String createBookPage() {
-		return "bookForm";
+		return "book/bookForm";
 	}
 
-	@RequestMapping("/books")
+	@RequestMapping({"user","/user","/user.html","user/index","user/index.html","/user/index","/user/index.html"})
 	public String showBooksPage() {
-		return "showBooks";
+		return "book/index";
 	}
 
-	@RequestMapping("/loan")
+	@RequestMapping({"loan", "/loan", "loan.html", "/loan.html", "book/loan", "/book/loan", "book/loan.html", "/book/loan.html"})
 	public String loanBookPage() {
-		return "loan";
+		return "book/loan";
 	}
 
 

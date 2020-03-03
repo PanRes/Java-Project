@@ -1,8 +1,4 @@
 spring:
-  mvc:
-    view:
-      prefix: /WEB-INF/view/
-      suffix: .jsp
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     show-sql: true
