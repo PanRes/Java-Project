@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
     <head>
         <meta charset="UTF-8">
         <title>Books</title>
     </head>
     <body>
-        Not Implemented yet <a href="/">Return Home</a>
+        <form action="#" th:action="@{/book}" th:object="${book}" method="post">
+            <h2>
+                Book Form
+            </h2>
+            <hr>
+            <table id="book" class="table table-striped">
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name" th:field="*{name}" class="form-control" required="required" placeholder="Book Name"/></td>
+                </tr>
+                <tr>
+                    <td>Summary</td>
+                    <td><input type="text" name="summary" th:field="*{summary}" class="form-control" required="required" placeholder="Book Summary"/></td>
+                </tr>
+                <tr>
+                    <td>ISBN</td>
+                    <td><input type="text" name="isbn" th:field="*{isbn}" class="form-control" required="required" placeholder="ISBN"/></td>
+                </tr>
+                <tr>
+                    <td>Purchased</td>
+                    <td><input type="number" name="purchased" th:field="*{purchased}" class="form-control" required="required" placeholder="Books Purchased"/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Save Book" />
+                        <button><a style="text-decoration: none" href="/">Cancel</a> </button>
+                        <input type="reset" value="Reset" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
     </body>
 </html>
