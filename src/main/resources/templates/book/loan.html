@@ -1,9 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" >
     <head>
-        <title>Loan</title>
+        <title>Loan Book</title>
     </head>
     <body>
-        Not Implemented yet <a href="/">Return Home</a>
+        <a href="/">Return Home</a>
+        <h2 th:text="'Loan Book Page'">Loan Book Page</h2>
+        <hr>
+        <span th:if="${loanReturns != null && loanReturns.size() > 0}">
+            <ol>
+                <li th:each="loanReturn:${loanReturns}" th:inline="text">
+                    <form th:action="@{/loan}" th:object="${loanReturnForm}" method='POST'>
+                        <input type="hidden" th:value="${loanReturn.getBook().getId()}" name="bookId"/>
+                        <span th:text="'&quot;' + ${loanReturn.getBook().getName()} + '&quot;, ' + ${loanReturn.getBook().getAvailable()} + ' available'" ></span>
+                        <select th:field="*{userId}">
+                            <option value="" selected="true" disabled="disabled"> -- </option>
+                            <option th:each="user : ${loanReturn.getUsers()}" th:value="${user.getId()}" th:text="${user.getFirstName() + ' ' + user.getLastName()}">
+                            </option>
+                        </select>
+                        <input type="submit" value="Accept Loan" />
+                    </form>
+                </li>
+            </ol>
+        </span>
+        <span th:if="${loanReturns == null || loanReturns.size() == 0}">
+            No Books Found
+        </span>
+
     </body>
 </html>
