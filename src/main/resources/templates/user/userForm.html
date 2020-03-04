@@ -24,7 +24,7 @@
                 </tr>
                 <tr>
                     <td>House Number</td>
-                    <td><input type="number" name="houseNumber" th:field="*{address.houseNumber}" class="form-control" required="required" placeholder="House Number"/></td>
+                    <td><input type="number" min="1" name="houseNumber" th:field="*{address.houseNumber}" class="form-control" required="required" placeholder="House Number"/></td>
                 </tr>
                 <tr>
                     <td>Postal Code</td>
@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <td>Town</td>
-                    <td><input type="text" name="houseNumber" th:field="*{address.town}" class="form-control" required="required" placeholder="Town"/></td>
+                    <td><input type="text" name="town" th:field="*{address.town}" class="form-control" required="required" placeholder="Town"/></td>
                 </tr>
                 <tr>
                     <td>
