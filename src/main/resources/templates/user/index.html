@@ -23,7 +23,7 @@
                     <td th:text="${user.firstName}"/>
                     <td th:text="${user.lastName}"/>
                     <td th:text="${user.address}"/>
-                    <td><a  th:if="${user.books == null || user.books.size() == 0}" th:href="@{/user/{userId}(userId=${user.id})}" th:text="'Delete User'"></a></td>
+                    <td><a th:href="@{/user/{userId}(userId=${user.id})}" th:text="'Delete User'"></a></td>
                 </tr>
                 </tbody>
             </table>

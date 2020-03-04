@@ -7,7 +7,7 @@
 	<body>
 		<a href="/">Return Home</a>
 
-		<h2 th:text="'User:' + ${user.firstName} + ' ' + ${user.lastName} + ' cannot be deleted. The following books must be returned first'"></h2>
+		<h2 th:text="'User: ' + ${user.firstName} + ' ' + ${user.lastName} + ' cannot be deleted. The following books must be returned first'"></h2>
 		<hr>
 		<ol>
 			<li th:each="book:${user.books}" th:text="${book.name}"></li>

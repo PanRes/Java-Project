@@ -1,5 +1,6 @@
 package com.persado.assignment.project.model.dto;
 
+import com.persado.assignment.project.model.entity.Book;
 import lombok.*;
 import org.springframework.util.CollectionUtils;
 
@@ -35,6 +36,15 @@ public class BookDto {
 
 	@ToString.Exclude
 	private List<UserDto> users;
+
+	public BookDto(Book book) {
+		this.id = book.getId();
+		this.name = book.getName();
+		this.summary = book.getSummary();
+		this.isbn = book.getIsbn();
+		this.purchased = book.getPurchased();
+		this.available = book.getAvailable();
+	}
 
 	public boolean isNew() {
 		return id == null;

@@ -5,10 +5,8 @@ import com.persado.assignment.project.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.naming.CannotProceedException;
 import javax.validation.Valid;
@@ -35,19 +33,19 @@ public class UserController {
 		return "user/index";
 	}
 	@RequestMapping("/user/cannot-delete")
-	public String errorOnUserDeletion(Model model) {
-		model.addAttribute("user", userService.findUserById((UUID) model.asMap().get("userId")));
+	public String errorOnUserDeletion(@ModelAttribute("userId") UUID userId, Model model) {
+		model.addAttribute("user", userService.findUserById(userId));
 		return "user/errorDeletion";
 	}
 
 	@RequestMapping("/user/{userId}")
-	public String deleteUser(@PathVariable UUID userId, Model model) {
+	public String deleteUser(@PathVariable UUID userId, RedirectAttributes redirectAttributes) {
 		try {
 			userService.deleteUser(userId);
 			return "redirect:/users";
 		} catch (CannotProceedException e) {
-			model.addAttribute("userId", userId);
-			return "redirect:/use/cannot-delete";
+			redirectAttributes.addFlashAttribute("userId", userId);
+			return "redirect:/user/cannot-delete";
 		}
 
 	}
